@@ -1,15 +1,15 @@
 import { useMemo } from 'react';
 import type {
-  UltraSrtNcstResponseParams,
-  VilageFcstResponseParams,
-  // UltraSrtFcstResponseParams,
+  UltraSrtNcstResponse,
+  VilageFcstResponse,
+  // UltraSrtFcstResponse,
 } from '../model/VFSInterface';
 import { parsingUtils } from '../utils/parsingUtils';
 
 export function useGetWeatherData(
-  ncstItems: UltraSrtNcstResponseParams[] | undefined,
-  vilageItems: VilageFcstResponseParams[] | undefined,
-  // ultraSrtFcstItems: UltraSrtFcstResponseParams[] | undefined,
+  ncstItems: UltraSrtNcstResponse[] | undefined,
+  vilageItems: VilageFcstResponse[] | undefined,
+  // ultraSrtFcstItems: UltraSrtFcstResponse[] | undefined,
   today: string
 ) {
   const { getCurrentTemp, getTodayTemps } = parsingUtils();
