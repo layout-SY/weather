@@ -4,8 +4,8 @@ import { VFS_ERROR_CODE_META } from '../constants/VFSResponseConstants';
 import type {
   VFSErrorCode,
   VFSResponse,
-  UltraSrtNcstResponseParams,
-  VilageFcstResponseParams,
+  UltraSrtNcstResponse,
+  VilageFcstResponse,
   WeatherCommonRequestParams,
 } from '../model/VFSInterface';
 
@@ -44,8 +44,8 @@ export const vfsAxios = AxiosInstance(VFS_BASE_URL, {
 
 export async function getUltraSrtNcst(
   params: WeatherCommonRequestParams
-): Promise<UltraSrtNcstResponseParams[]> {
-  const { data } = await vfsAxios.get<VFSResponse<UltraSrtNcstResponseParams>>(
+): Promise<UltraSrtNcstResponse[]> {
+  const { data } = await vfsAxios.get<VFSResponse<UltraSrtNcstResponse>>(
     '/getUltraSrtNcst',
     {
       params: {
@@ -78,8 +78,8 @@ export async function getUltraSrtNcst(
 
 export async function getVilageFcst(
   params: WeatherCommonRequestParams
-): Promise<VilageFcstResponseParams[]> {
-  const { data } = await vfsAxios.get<VFSResponse<VilageFcstResponseParams>>(
+): Promise<VilageFcstResponse[]> {
+  const { data } = await vfsAxios.get<VFSResponse<VilageFcstResponse>>(
     '/getVilageFcst',
     {
       params: {

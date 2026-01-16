@@ -26,7 +26,7 @@ export interface WeatherCommonRequestParams {
   ny: number;
 }
 
-export interface WeatherCommonResponseParams {
+export interface WeatherCommonResponse {
   category?: string;
   nx: number;
   ny: number;
@@ -35,20 +35,18 @@ export interface WeatherCommonResponseParams {
 }
 
 /** 초단기실황조회(getUltraSrtNcst) 파라미터 */
-export interface UltraSrtNcstResponseParams
-  extends WeatherCommonResponseParams {
+export interface UltraSrtNcstResponse extends WeatherCommonResponse {
   obsrValue: string | number;
 }
 
 /** 단기예보조회(getVilageFcst) 파라미터 */
-export interface VilageFcstResponseParams extends WeatherCommonResponseParams {
+export interface VilageFcstResponse extends WeatherCommonResponse {
   fcstDate: number;
   fcstTime: number;
   fcstValue: string | number;
 }
 
-export interface UltraSrtFcstResponseParams
-  extends WeatherCommonResponseParams {
+export interface UltraSrtFcstResponse extends WeatherCommonResponse {
   fcstDate: number;
   fcstTime: number;
   fcstValue: string | number;
