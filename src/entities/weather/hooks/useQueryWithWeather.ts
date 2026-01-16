@@ -11,7 +11,7 @@ const weatherQueryKey = (params: WeatherCommonRequestParams) => ({
   dataType: params.dataType,
 });
 
-export function useQueryWithWeather(params: WeatherCommonRequestParams) {
+export function useUltraSrtNcst(params: WeatherCommonRequestParams) {
   return useQuery({
     queryKey: ['vfs', 'ultraSrtNcst', weatherQueryKey(params)],
     queryFn: () => getUltraSrtNcst(params),
