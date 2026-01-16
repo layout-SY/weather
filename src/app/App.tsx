@@ -1,6 +1,7 @@
 import { useWeatherInterface } from '../entities/weather/hooks/useWeatherInterface';
 import { useGetWeatherData } from '../entities/weather/hooks/useGetWeatherData';
 import './styles/App.css';
+import { AddressModal } from '../entities/address/components/AdrressModal';
 
 function App() {
   const { ncstQuery, vilageQuery, today } = useWeatherInterface();
@@ -47,6 +48,7 @@ function App() {
               ))}
             </ul>
           </section>
+          <AddressModal />
         </main>
       </header>
     </div>
