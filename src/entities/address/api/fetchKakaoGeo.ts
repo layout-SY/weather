@@ -18,9 +18,16 @@ export const kakaoGeoAxios = AxiosInstance(KAKAO_GEO_BASE_URL, {
   timeout: 15_000,
 });
 
-export async function getKakaoGeoAddress(
+ interface KakaoCoord2AddressResponse {
+  documents?: Array<{
+    address?: { address_name: string } | null;
+    road_address?: { address_name: string } | null;
+  }>;
+};
+
+export  const getKakaoGeoAddress = async (
   params: KakaoGeoRequestParams
-): Promise<Documents[]> {
+): Promise<Documents[]> => {
   const { data } = await kakaoGeoAxios.get<KakaoGeoResponse>(
     '/search/address.json',
     {
@@ -31,4 +38,24 @@ export async function getKakaoGeoAddress(
     }
   );
   return data.documents ?? [];
+}
+
+export const getKakaoAddressFromCoords = async (params: {
+  x: number;
+  y: number;
+}): Promise<string | null> => {
+  const { data } = await kakaoGeoAxios.get<KakaoCoord2AddressResponse>(
+    '/geo/coord2address.json',
+    {
+      headers: {
+        Authorization: `KakaoAK ${SERVICE_KEY}`,
+      },
+      params,
+    }
+  );
+
+  const first = data.documents?.[0];
+  return (
+    first?.road_address?.address_name ?? first?.address?.address_name ?? null
+  );
 }
