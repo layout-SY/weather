@@ -11,23 +11,43 @@ const weatherQueryKey = (params: WeatherCommonRequestParams) => ({
   dataType: params.dataType,
 });
 
-export function useUltraSrtNcst(params: WeatherCommonRequestParams) {
-  return useQuery({
-    queryKey: ['vfs', 'ultraSrtNcst', weatherQueryKey(params)],
-    queryFn: () => getUltraSrtNcst(params),
-  });
+interface UseQueryWithWeatherProps {
+  ncstParams: WeatherCommonRequestParams;
+  vilageParams: WeatherCommonRequestParams;
+  enabled?: boolean;
 }
 
-// export function useUltraSrtFcst(params: WeatherCommonRequestParams) {
-//   return useQuery({
-//     queryKey: ['vfs', 'ultraSrtFcst', params],
-//     queryFn: () => getUltraSrtFcst(params),
-//   });
-// }
-
-export function useVilageFcst(params: WeatherCommonRequestParams) {
-  return useQuery({
-    queryKey: ['vfs', 'vilageFcst', weatherQueryKey(params)],
-    queryFn: () => getVilageFcst(params),
+export const useQueryWithWeather = ({
+  ncstParams,
+  vilageParams,
+  enabled = true,
+}: UseQueryWithWeatherProps) => {
+  const {
+    data: currentWeatherData,
+    isLoading: currentWeatherLoading,
+    error: currentWeatherError,
+  } = useQuery({
+    queryKey: ['vfs', 'ultraSrtNcst', weatherQueryKey(ncstParams)],
+    queryFn: () => getUltraSrtNcst(ncstParams),
+    enabled,
   });
-}
+
+  const {
+    data: todayWeatherData,
+    isLoading: todayWeatherLoading,
+    error: todayWeatherError,
+  } = useQuery({
+    queryKey: ['vfs', 'vilageFcst', weatherQueryKey(vilageParams)],
+    queryFn: () => getVilageFcst(vilageParams),
+    enabled,
+  });
+
+  return {
+    currentWeatherData,
+    isCurrentWeatherLoading: currentWeatherLoading,
+    currentWeatherError: currentWeatherError,
+    todayWeatherData,
+    isTodayWeatherLoading: todayWeatherLoading,
+    todayWeatherError: todayWeatherError,
+  };
+};

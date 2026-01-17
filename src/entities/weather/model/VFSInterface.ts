@@ -17,7 +17,7 @@ export interface VFSResponse<TItem> {
 }
 
 export interface WeatherCommonRequestParams {
-  numOfRows: number;
+  numOfRows?: number;
   pageNo: number;
   dataType: 'JSON' | 'XML';
   base_date: string;
@@ -41,13 +41,13 @@ export interface UltraSrtNcstResponse extends WeatherCommonResponse {
 
 /** 단기예보조회(getVilageFcst) 파라미터 */
 export interface VilageFcstResponse extends WeatherCommonResponse {
-  fcstDate: number;
-  fcstTime: number;
+  fcstDate: string;
+  fcstTime: string;
   fcstValue: string | number;
 }
 
 export interface UltraSrtFcstResponse extends WeatherCommonResponse {
-  fcstDate: number;
-  fcstTime: number;
+  fcstDate: string;
+  fcstTime: string;
   fcstValue: string | number;
 }

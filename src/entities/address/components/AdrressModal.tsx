@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { useQueryWithKakaoGeoAddress } from '../hooks/useQueryWithKakaoGeoAddress';
+import { useQueryWithKakaoGeoAddress } from '../hooks/useQueryWithKakaoGeo';
 import { latLngToGridXY } from '../utils/latLngToGridXY';
 
 export function AddressModal() {
