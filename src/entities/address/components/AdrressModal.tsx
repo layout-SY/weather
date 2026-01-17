@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { useQueryWithKakaoGeoAddress } from '../hooks/useQueryWithKakaoGeoAddress';
+import { latLngToGridXY } from '../utils/latLngToGridXY';
 
 export function AddressModal() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -23,8 +24,6 @@ export function AddressModal() {
     setSearchQuery(address.trim());
   };
 
-  console.log(data);
-
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -35,11 +34,25 @@ export function AddressModal() {
       {error && <p>검색 실패</p>}
       {data && (
         <ul>
-          {data.map((item) => (
-            <li key={`${item.address_name}-${item.x}-${item.y}`}>
-              {item.address_name}
-            </li>
-          ))}
+          {data.map((item) => {
+            const lat = Number(item.y);
+            const lng = Number(item.x);
+            const grid =
+              Number.isFinite(lat) && Number.isFinite(lng)
+                ? latLngToGridXY({ lat, lng })
+                : null;
+            return (
+              <li key={`${item.address_name}-${item.x}-${item.y}`}>
+                {item.address_name}
+                {grid && (
+                  <>
+                    {' '}
+                    · x: {grid.x}, y: {grid.y}
+                  </>
+                )}
+              </li>
+            );
+          })}
         </ul>
       )}
     </div>
