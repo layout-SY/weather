@@ -1,9 +1,12 @@
+import { Outlet } from 'react-router-dom';
 import { ROUTES } from './routingConstants';
 import { MainPage } from '../main/MainPage';
 import { NewWeather } from '../newWeather/NewWeather';
 import { WeatherDetail } from '../weatherDetail/WeatherDetail';
 import { FavoriteWeathers } from '../favoriteWeathers/FavoriteWeathers';
 import { NotFoundPage } from '../notFoundPage/NotFoundPage';
+import { AddressModal } from '../../entities/address/components/AdrressModal';
+import { AddressModalProvider } from '../../entities/address/context/AddressModalContext';
 
 export const AppRoutes = () => {
   const routeList = [
@@ -33,7 +36,18 @@ export const AppRoutes = () => {
     };
   });
 
-  return newRouteList;
+  return [
+    {
+      element: (
+        <AddressModalProvider>
+          <AddressModal />
+          <Outlet />
+        </AddressModalProvider>
+      ),
+      children: newRouteList,
+    },
+  ];
 };
 
 export default AppRoutes;
+

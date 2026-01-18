@@ -1,13 +1,24 @@
 import { useWeather } from "../hooks/useWeather";
 import { Place } from "../model/place";
+import { useAddressModal } from "../../address/context/AddressModalContext";
 
 export function Detail({place} : {place: Place}) {
+  const { openModal, closeModal } = useAddressModal();
 
   const { todayWeatherData, currentTemp, todayMinTemp, todayMaxTemp } =
     useWeather({ x: place.lat, y: place.lng });
 
   return <div>
  
+  <div>
+    <button type="button" onClick={openModal}>
+      주소 검색 열기
+    </button>
+    <button type="button" onClick={closeModal}>
+      주소 검색 닫기
+    </button>
+  </div>
+
   <div>현재 기온: {currentTemp ?? '-'} °C</div>
   <div>당일 최저: {todayMinTemp ?? '-'} °C</div>
   <div>당일 최고: {todayMaxTemp ?? '-'} °C</div> 
