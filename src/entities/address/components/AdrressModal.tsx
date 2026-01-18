@@ -72,7 +72,7 @@ export function AddressModal() {
                 onClick={() => setSelectedAddress(item.label)}
                 className='cursor-pointer px-3 py-2 hover:bg-gray-50'
               >
-                {item.label} · {item.matchRate}%
+                {item.label}
               </li>
             ))}
           </ul>
