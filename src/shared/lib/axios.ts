@@ -1,6 +1,6 @@
 import axios, { AxiosError } from 'axios';
 
-export type ApiErrorPayload = {
+export interface ApiErrorPayload {
   code: string | number;
   message: string;
   status?: number;
@@ -23,7 +23,7 @@ export class ApiError extends Error {
 
 type ErrorExtractor = (data: unknown) => ApiErrorPayload | null;
 
-type AxiosInstanceOptions = {
+interface AxiosInstanceOptions {
   timeout?: number;
   errorExtractor?: ErrorExtractor;
 };
