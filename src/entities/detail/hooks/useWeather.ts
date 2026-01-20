@@ -2,7 +2,7 @@ import { latLngToGridXY } from '../../address/utils/latLngToGridXY';
 import { useQueryWithWeather } from '../../weather/hooks/useQueryWithWeather';
 import { dateUtils } from '../../weather/utils/dateUtils';
 
-export const useWeather = ( coords: { x: number; y: number } | null) => {
+export const useWeather = (coords: { x: number; y: number } | null) => {
   const now = new Date();
   const { getUltraSrtNcstBase, getVilageBase } = dateUtils();
   const ncstBase = getUltraSrtNcstBase(now);
@@ -42,9 +42,15 @@ export const useWeather = ( coords: { x: number; y: number } | null) => {
     enabled: canFetchWeather,
   });
 
-  const currentTemp = currentWeatherData?.find((item) => item.category === 'T1H')?.obsrValue ?? null;
-  const todayMinTemp = todayWeatherData?.find((item) => item.category === 'TMN')?.fcstValue ?? null;
-  const todayMaxTemp = todayWeatherData?.find((item) => item.category === 'TMX')?.fcstValue ?? null;
+  const currentTemp =
+    currentWeatherData?.find((item) => item.category === 'T1H')?.obsrValue ??
+    null;
+  const todayMinTemp =
+    todayWeatherData?.find((item) => item.category === 'TMN')?.fcstValue ??
+    null;
+  const todayMaxTemp =
+    todayWeatherData?.find((item) => item.category === 'TMX')?.fcstValue ??
+    null;
 
   return {
     currentTemp,

@@ -6,13 +6,11 @@ type AddressModalContextValue = {
   closeModal: () => void;
 };
 
-const AddressModalContext = createContext<AddressModalContextValue | null>(null);
+const AddressModalContext = createContext<AddressModalContextValue | null>(
+  null,
+);
 
-export function AddressModalProvider({
-  children,
-}: {
-  children: ReactNode;
-}) {
+export function AddressModalProvider({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
   const value = useMemo(
     () => ({
@@ -20,7 +18,7 @@ export function AddressModalProvider({
       openModal: () => setIsOpen(true),
       closeModal: () => setIsOpen(false),
     }),
-    [isOpen]
+    [isOpen],
   );
 
   return (

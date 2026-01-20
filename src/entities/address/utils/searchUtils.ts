@@ -26,7 +26,7 @@ const getMatchScore = (query: string, candidate: string) => {
 export const getAddressResults = (
   districts: Array<string | number>,
   query: string,
-  limit = 20
+  limit = 20,
 ): AddressResult[] => {
   const trimmed = query.trim();
   if (!trimmed) return [];
@@ -38,7 +38,8 @@ export const getAddressResults = (
       const normalizedCandidate = normalizeAddress(candidate);
       const score = getMatchScore(trimmed, candidate);
       const matchRate = Math.round(
-        (normalizedQuery.length / Math.max(normalizedCandidate.length, 1)) * 100
+        (normalizedQuery.length / Math.max(normalizedCandidate.length, 1)) *
+          100,
       );
       return {
         label: candidate,
