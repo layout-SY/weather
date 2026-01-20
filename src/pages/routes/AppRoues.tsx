@@ -1,7 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import { ROUTES } from './routingConstants';
 import { MainPage } from '../main/MainPage';
-import { NewWeather } from '../newWeather/NewWeather';
 import { WeatherDetail } from '../weatherDetail/WeatherDetail';
 import { FavoriteWeathers } from '../favoriteWeathers/FavoriteWeathers';
 import { NotFoundPage } from '../notFoundPage/NotFoundPage';
@@ -15,12 +14,7 @@ export const AppRoutes = () => {
       element: <MainPage />,
     },
     {
-      path: ROUTES.newWeather,
-      element: <NewWeather />,
-    },
-
-    {
-      path: `${ROUTES.weatherDetail}/:weatherId`,
+      path: `${ROUTES.weatherDetail}`,
       element: <WeatherDetail />,
     },
     {
@@ -50,4 +44,3 @@ export const AppRoutes = () => {
 };
 
 export default AppRoutes;
-

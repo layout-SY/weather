@@ -17,7 +17,7 @@ export function AddressModal() {
 
   const results = useMemo(
     () => getAddressResults(districts as string[], throttledQuery, 20),
-    [throttledQuery]
+    [throttledQuery],
   );
 
   const {
@@ -89,11 +89,13 @@ export function AddressModal() {
                   lat: {kakaoResults[0].x}, lng: {kakaoResults[0].y}
                 </p>
                 <Link
-                  to={ROUTES.newWeather}
-                  state={{place: {
+                  to={ROUTES.weatherDetail}
+                  state={{
+                    place: {
                       address: selectedAddress,
                       lat: Number(kakaoResults[0].x),
                       lng: Number(kakaoResults[0].y),
+                      alias: '',
                     },
                   }}
                   onClick={closeModal}
@@ -109,4 +111,3 @@ export function AddressModal() {
     </div>
   );
 }
-
