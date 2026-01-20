@@ -3,7 +3,6 @@ import { useQueryWithWeather } from '../../weather/hooks/useQueryWithWeather';
 import { dateUtils } from '../../weather/utils/dateUtils';
 
 export const useWeather = ( coords: { x: number; y: number } | null) => {
-
   const now = new Date();
   const { getUltraSrtNcstBase, getVilageBase } = dateUtils();
   const ncstBase = getUltraSrtNcstBase(now);
@@ -16,7 +15,6 @@ export const useWeather = ( coords: { x: number; y: number } | null) => {
       ? latLngToGridXY({ lat, lng })
       : null;
   const canFetchWeather = Boolean(grid);
-
 
   const {
     currentWeatherData,
