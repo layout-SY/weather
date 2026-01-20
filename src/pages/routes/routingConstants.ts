@@ -1,6 +1,6 @@
 export const ROUTES = {
   main: '/',
   weatherDetail: '/weather-detail',
-  favoriteWeathers: '/favorite-weathers',
+  favoriteWeathers: '/favorites',
   newWeather: '/new-weather',
 } as const;

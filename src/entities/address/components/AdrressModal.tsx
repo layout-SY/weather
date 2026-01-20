@@ -86,13 +86,15 @@ export function AddressModal() {
             {kakaoResults?.[0] && (
               <>
                 <p className='mt-2'>
-                  lat: {kakaoResults[0].y}, lng: {kakaoResults[0].x}
+                  lat: {kakaoResults[0].x}, lng: {kakaoResults[0].y}
                 </p>
                 <Link
                   to={ROUTES.newWeather}
-                  state={{
-                    address: selectedAddress,
-                    coords: { x: kakaoResults[0].x, y: kakaoResults[0].y },
+                  state={{place: {
+                      address: selectedAddress,
+                      lat: Number(kakaoResults[0].x),
+                      lng: Number(kakaoResults[0].y),
+                    },
                   }}
                   onClick={closeModal}
                   className='mt-3 inline-block rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white hover:bg-blue-700'
