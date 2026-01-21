@@ -49,6 +49,10 @@ export function useFavoriteAddress(place: Place) {
 
   const saveFavorite = () => {
     const list = loadFavorites();
+    const alreadySaved = list.some((item) => matchesPlace(item, place));
+    if (!alreadySaved && list.length >= 6) {
+      return;
+    }
     const item: Place = {
       ...place,
       id: list.length + 1,
