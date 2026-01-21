@@ -6,19 +6,9 @@ export function FavoriteWeathers() {
   const [favorites, setFavorites] = useState<Place[]>([]);
 
   useEffect(() => {
-    const items = Object.keys(localStorage)
-      .map((key) => localStorage.getItem(key))
-      .filter((raw): raw is string => Boolean(raw))
-      .map((raw) => {
-        try {
-          const parsed = JSON.parse(raw)
-          return parsed.place as Place
-        } catch {
-          return null;
-        }
-      })
-      .filter((favorite): favorite is Place => Boolean(favorite));
-    setFavorites(items);
+    const stored = localStorage.getItem('favorites');
+    const favorites = stored ? (JSON.parse(stored) as Place[]) : [];
+    setFavorites(favorites);
   }, []);
 
   if (favorites.length === 0) {
