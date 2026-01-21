@@ -11,12 +11,13 @@ export function FavoriteWeathers() {
       .filter((raw): raw is string => Boolean(raw))
       .map((raw) => {
         try {
-          return JSON.parse(raw) as Place;
+          const parsed = JSON.parse(raw)
+          return parsed.place as Place
         } catch {
           return null;
         }
       })
-      .filter((item): item is Place => Boolean(item));
+      .filter((favorite): favorite is Place => Boolean(favorite));
     setFavorites(items);
   }, []);
 
@@ -26,8 +27,8 @@ export function FavoriteWeathers() {
 
   return (
     <div className='grid gap-3'>
-      {favorites.map((item) => (
-        <FavoriteCard key={item.id} place={item} />
+      {favorites.map((favorite) => (
+        <FavoriteCard key={favorite.id} place={favorite} />
       ))}
     </div>
   );

@@ -21,7 +21,7 @@ export function useFavoriteAddress(place: Place) {
       return;
     }
     try {
-      const parsed = JSON.parse(stored) as { alias?: string } | null;
+      const parsed = JSON.parse(stored) as Place | null;
       setIsFavorite(true);
       setAlias(parsed?.alias ?? '');
     } catch {
@@ -33,11 +33,9 @@ export function useFavoriteAddress(place: Place) {
   const closeAliasEditor = () => setIsEditingAlias(false);
 
   const saveFavorite = () => {
-    const payload = {
-      place: {
-        ...place,
-        alias: alias.trim(),
-      },
+    const payload: Place = {
+      ...place,
+      alias: alias.trim(),
     };
     localStorage.setItem(storageKey, JSON.stringify(payload));
     setIsFavorite(true);
