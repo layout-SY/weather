@@ -21,7 +21,7 @@ export function MainPage() {
       },
       () => {
         setGeoError('위치 정보 권한이 필요합니다.');
-      }
+      },
     );
   }, []);
 
@@ -44,13 +44,13 @@ export function MainPage() {
   }
 
   return (
-    <Detail 
-    place={{
-      id: '1',
-      address: address ?? '',
-      lat: coords?.x ?? 0,
-      lng: coords?.y ?? 0,
-    }}
+    <Detail
+      place={{
+        id: '1',
+        address: address ?? '',
+        lat: coords?.x ?? 0,
+        lng: coords?.y ?? 0,
+      }}
     />
   );
 }

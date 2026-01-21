@@ -21,7 +21,7 @@ export const useQueryWithKakaoGeoAddress = (params: KakaoGeoRequestParams) => {
 };
 
 export const useQueryWithKakaoGeoCoords = (
-  coords: { x: number; y: number } | null
+  coords: { x: number; y: number } | null,
 ) => {
   const { data, isLoading, error } = useQuery({
     queryKey: ['kakaoAddressWithCoords', coords?.x, coords?.y],
@@ -30,4 +30,4 @@ export const useQueryWithKakaoGeoCoords = (
   });
 
   return { data, isLoading, error };
-}
+};
