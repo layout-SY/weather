@@ -4,9 +4,7 @@ import { useEffect, useState } from 'react';
 const STORAGE_KEY = 'favorites';
 
 const matchesPlace = (item: Place, place: Place) =>
-  item.address?.trim() === place.address?.trim() &&
-  item.lat === place.lat &&
-  item.lng === place.lng;
+  item.address?.trim() === place.address?.trim()
 
 const loadFavorites = (): Place[] => {
   try {
