@@ -1,3 +1,5 @@
+import { formatAddress } from '../../../shared/utils/formatAddress';
+
 export interface AddressResult {
   label: string;
   score: number;
@@ -7,10 +9,17 @@ export interface AddressResult {
 const normalizeAddress = (value: string | number) =>
   String(value).replace(/[\s-]/g, '').toLowerCase();
 
+const splitAddressParts = (value: string | number) => {
+  const formatted = formatAddress(value);
+  return formatted ? formatted.split(' ').filter(Boolean) : [];
+};
+
 const getMatchScore = (query: string, candidate: string) => {
   if (!query) return 0;
+  const parts = splitAddressParts(candidate);
+  const candidateForSearch = parts.join(' ');
   const normalizedQuery = normalizeAddress(query);
-  const normalizedCandidate = normalizeAddress(candidate);
+  const normalizedCandidate = normalizeAddress(candidateForSearch);
   if (!normalizedQuery || !normalizedCandidate) return 0;
   if (normalizedCandidate.startsWith(normalizedQuery)) {
     return 100 + normalizedQuery.length;
@@ -19,7 +28,11 @@ const getMatchScore = (query: string, candidate: string) => {
     return 80 + normalizedQuery.length;
   }
   const tokens = query.split(/[\s-]+/).filter(Boolean);
-  const matched = tokens.filter((t) => candidate.includes(t)).length;
+  const matched = tokens.filter((token) =>
+    parts.some((part) =>
+      normalizeAddress(part).includes(normalizeAddress(token)),
+    ),
+  ).length;
   return matched * 10;
 };
 
@@ -35,14 +48,15 @@ export const getAddressResults = (
     .filter((item) => typeof item === 'string' || typeof item === 'number')
     .map((item) => {
       const candidate = String(item);
-      const normalizedCandidate = normalizeAddress(candidate);
+      const candidateForSearch = splitAddressParts(candidate).join(' ');
+      const normalizedCandidate = normalizeAddress(candidateForSearch);
       const score = getMatchScore(trimmed, candidate);
       const matchRate = Math.round(
         (normalizedQuery.length / Math.max(normalizedCandidate.length, 1)) *
           100,
       );
       return {
-        label: candidate,
+        label: formatAddress(candidate) || candidate,
         score,
         matchRate,
       };
