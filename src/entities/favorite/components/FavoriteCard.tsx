@@ -2,9 +2,11 @@ import { Link } from 'react-router-dom';
 import type { Place } from '../../detail/model/place';
 import { useWeather } from '../../detail/hooks/useWeather';
 import { ROUTES } from '../../../pages/routes/routingConstants';
+import { formatAddress } from '../../../shared/utils/formatAddress';
 
 export function FavoriteCard({ place }: { place: Place }) {
   const title = place.alias?.trim() || place.address || place.id;
+  const displayAddress = formatAddress(place.address);
   const { todayMinTemp, todayMaxTemp } = useWeather({
     x: place.lat,
     y: place.lng,
@@ -14,12 +16,21 @@ export function FavoriteCard({ place }: { place: Place }) {
     <Link
       to={ROUTES.weatherDetail}
       state={{ place }}
-      className='block rounded-md border border-gray-200 p-3 text-sm hover:border-blue-300 hover:bg-blue-50'
+      className='block h-full min-h-[120px] rounded-2xl bg-white p-4 text-black transition-colors'
     >
-      <div className='text-base font-semibold'>{title}</div>
-      <div className='text-gray-600'>{place.address ?? '-'}</div>
-      <div className='text-gray-600'>
-        최저: {todayMinTemp ?? '-'} °C / 최고: {todayMaxTemp ?? '-'} °C
+      <div className='flex h-full flex-col justify-between gap-11'>
+        <div className='flex items-start justify-between gap-4'>
+          <div className='text-xl font-semibold leading-snug'>{title}</div>
+          <div className='text-3xl font-semibold leading-none'>
+            {todayMaxTemp ?? '-'}°
+          </div>
+        </div>
+        <div className='mt-auto flex items-end justify-between gap-3 text-[0.65rem]'>
+          <div className='min-w-0 truncate'>{displayAddress || '-'}</div>
+          <div className='whitespace-nowrap'>
+            최고:{todayMaxTemp ?? '-'}° 최저:{todayMinTemp ?? '-'}°
+          </div>
+        </div>
       </div>
     </Link>
   );
