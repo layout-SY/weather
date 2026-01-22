@@ -30,6 +30,12 @@ export function AddressModal() {
     page: 1,
   });
 
+  const handleCloseModal = () => {
+    closeModal();
+    setInputValue('');
+    setSelectedAddress('');
+  }
+
   if (!isOpen) {
     return null;
   }
@@ -37,7 +43,7 @@ export function AddressModal() {
   return (
     <div
       className='fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4'
-      onClick={closeModal}
+      onClick={handleCloseModal}
     >
       <div
         className='w-full max-w-xl rounded-lg bg-white p-4 shadow-lg'
@@ -47,7 +53,7 @@ export function AddressModal() {
           <span>주소 검색</span>
           <button
             type='button'
-            onClick={closeModal}
+            onClick={handleCloseModal}
             className='rounded px-2 py-1 text-sm text-gray-500 hover:bg-gray-100'
           >
             닫기
@@ -81,13 +87,8 @@ export function AddressModal() {
           <div className='mt-4 rounded-md bg-gray-50 p-3 text-sm'>
             <h4 className='mb-1 font-semibold'>선택한 주소</h4>
             <p>{selectedAddress}</p>
-            {isKakaoLoading && <p className='mt-2'>좌표 조회 중...</p>}
-            {kakaoError && <p className='mt-2 text-red-600'>좌표 조회 실패</p>}
             {kakaoResults?.[0] && (
               <>
-                <p className='mt-2'>
-                  lat: {kakaoResults[0].x}, lng: {kakaoResults[0].y}
-                </p>
                 <Link
                   to={ROUTES.weatherDetail}
                   state={{
@@ -98,10 +99,10 @@ export function AddressModal() {
                       alias: '',
                     },
                   }}
-                  onClick={closeModal}
+                  onClick={handleCloseModal}
                   className='mt-3 inline-block rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white hover:bg-blue-700'
                 >
-                  새 날씨 페이지로 이동
+                  날씨 확인하기
                 </Link>
               </>
             )}

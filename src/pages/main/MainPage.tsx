@@ -31,10 +31,6 @@ export function MainPage() {
     error: addressError,
   } = useQueryWithKakaoGeoCoords({ x: coords?.x ?? 0, y: coords?.y ?? 0 });
 
-  if (geoError) {
-    return <div>{geoError}</div>;
-  }
-
   if (addressError) {
     return <div>주소 변환에 실패했습니다.</div>;
   }
@@ -46,7 +42,7 @@ export function MainPage() {
   return (
     <Detail
       place={{
-        id: '1',
+        id: 1,
         address: address ?? '',
         lat: coords?.x ?? 0,
         lng: coords?.y ?? 0,
