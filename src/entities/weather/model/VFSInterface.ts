@@ -2,7 +2,7 @@ import { VFS_ERROR_CODE_META } from '../constants/VFSResponseConstants';
 
 export type VFSErrorCode = keyof typeof VFS_ERROR_CODE_META;
 
-// (선택) 공통 응답 타입(필요한 만큼만)
+// 공통 응답 타입
 export interface VFSResponse<TItem> {
   response: {
     header: { resultCode: string; resultMsg: string };
@@ -34,19 +34,11 @@ export interface WeatherCommonResponse {
   base_time: string;
 }
 
-/** 초단기실황조회(getUltraSrtNcst) 파라미터 */
 export interface UltraSrtNcstResponse extends WeatherCommonResponse {
   obsrValue: string | number;
 }
 
-/** 단기예보조회(getVilageFcst) 파라미터 */
 export interface VilageFcstResponse extends WeatherCommonResponse {
-  fcstDate: string;
-  fcstTime: string;
-  fcstValue: string | number;
-}
-
-export interface UltraSrtFcstResponse extends WeatherCommonResponse {
   fcstDate: string;
   fcstTime: string;
   fcstValue: string | number;

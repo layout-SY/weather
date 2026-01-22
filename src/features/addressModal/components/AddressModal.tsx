@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import districts from '../../../entities/address/korea_districts.json';
+import districts from '../../../../public/korea_districts.json';
 import { useQueryWithKakaoGeoAddress } from '../../../entities/address/hooks/useQueryWithKakaoGeo';
 import { useDebounce } from '../../../shared/hooks/useDebounce';
 import { useThrottle } from '../../../shared/hooks/useThrottle';

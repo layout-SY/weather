@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useQueryWithKakaoGeoCoords } from '../../entities/address/hooks/useQueryWithKakaoGeo';
 import { Detail } from '../../widgets/detail/components/Detail';
+import { LoadingSpinner } from '../../shared/components/LoadingSpinner';
 
 export function MainPage() {
   const [coords, setCoords] = useState<{ x: number; y: number } | null>(null);
@@ -35,7 +36,11 @@ export function MainPage() {
   }
 
   if (isAddressLoading) {
-    return <div>위치 기반 주소를 불러오는 중...</div>;
+    return (
+      <div>
+        <LoadingSpinner />
+      </div>
+    );
   }
 
   return (

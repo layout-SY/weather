@@ -7,7 +7,6 @@ export function WeatherDetail() {
   const state = location.state as { place?: Place } | undefined;
   const place = state?.place;
 
-  // 변경 예정
   if (!place) {
     return <div>정보 없음</div>;
   }

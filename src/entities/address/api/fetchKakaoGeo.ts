@@ -1,4 +1,3 @@
-// src/api/vfsShortForecast.ts
 import { AxiosInstance } from '../../../shared/lib/axios';
 import { KakaoGeoRequestParams } from '../model/KakaoGeoRequestInterface';
 import {
@@ -26,7 +25,7 @@ interface KakaoCoord2AddressResponse {
 }
 
 export const getKakaoGeoAddress = async (
-  params: KakaoGeoRequestParams,
+  params: KakaoGeoRequestParams
 ): Promise<Documents[]> => {
   const { data } = await kakaoGeoAxios.get<KakaoGeoResponse>(
     '/search/address.json',
@@ -35,7 +34,7 @@ export const getKakaoGeoAddress = async (
         Authorization: `KakaoAK ${SERVICE_KEY}`,
       },
       params,
-    },
+    }
   );
   return data.documents ?? [];
 };
@@ -51,7 +50,7 @@ export const getKakaoAddressFromCoords = async (params: {
         Authorization: `KakaoAK ${SERVICE_KEY}`,
       },
       params,
-    },
+    }
   );
 
   const first = data.documents?.[0];
