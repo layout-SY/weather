@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useQueryWithKakaoGeoCoords } from '../../entities/address/hooks/useQueryWithKakaoGeo';
-import { useWeather } from '../../entities/detail/hooks/useWeather';
-import { Detail } from '../../entities/detail/components/Detail';
+import { Detail } from '../../widgets/detail/components/Detail';
 
 export function MainPage() {
   const [coords, setCoords] = useState<{ x: number; y: number } | null>(null);
@@ -21,7 +20,7 @@ export function MainPage() {
       },
       () => {
         setGeoError('위치 정보 권한이 필요합니다.');
-      },
+      }
     );
   }, []);
 

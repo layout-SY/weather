@@ -7,7 +7,7 @@ type AddressModalContextValue = {
 };
 
 const AddressModalContext = createContext<AddressModalContextValue | null>(
-  null,
+  null
 );
 
 export function AddressModalProvider({ children }: { children: ReactNode }) {
@@ -18,7 +18,7 @@ export function AddressModalProvider({ children }: { children: ReactNode }) {
       openModal: () => setIsOpen(true),
       closeModal: () => setIsOpen(false),
     }),
-    [isOpen],
+    [isOpen]
   );
 
   return (

@@ -1,7 +1,7 @@
 import { lazy, Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
-import { ROUTES } from './routingConstants';
-import { AddressModalProvider } from '../../entities/address/context/AddressModalContext';
+import { ROUTES } from '../../shared/constants/routes';
+import { AddressModalProvider } from '../../features/addressModal/context/AddressModalContext';
 import { LoadingSpinner } from '../../shared/components/LoadingSpinner';
 
 const MainPage = lazy(() =>
@@ -18,9 +18,11 @@ const FavoriteWeathers = lazy(() =>
   }))
 );
 const AddressModal = lazy(() =>
-  import('../../entities/address/components/AdrressModal').then((module) => ({
-    default: module.AddressModal,
-  }))
+  import('../../features/addressModal/components/AddressModal').then(
+    (module) => ({
+      default: module.AddressModal,
+    })
+  )
 );
 
 export const AppRoutes = () => {

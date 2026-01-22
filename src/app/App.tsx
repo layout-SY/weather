@@ -1,8 +1,7 @@
 import './styles/App.css';
-import { AddressModal } from '../entities/address/components/AdrressModal';
+import { AddressModal } from '../features/addressModal/components/AddressModal';
 
 function App() {
-
   return (
     <div className='App'>
       <header className='App-header'>

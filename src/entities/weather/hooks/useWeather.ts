@@ -1,6 +1,6 @@
-import { latLngToGridXY } from '../../address/utils/latLngToGridXY';
-import { useQueryWithWeather } from '../../weather/hooks/useQueryWithWeather';
-import { dateUtils } from '../../weather/utils/dateUtils';
+import { latLngToGridXY } from '../../../shared/utils/latLngToGridXY';
+import { useQueryWithWeather } from './useQueryWithWeather';
+import { dateUtils } from '../utils/dateUtils';
 
 export const useWeather = (coords: { x: number; y: number } | null) => {
   const now = new Date();
