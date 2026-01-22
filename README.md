@@ -10,7 +10,6 @@
 
 #### 📍 실행 환경
 
-- Node.js 20.18.1
 - `.env 파일`에 아래의 항목들이 있어야 합니다.
 
   - `VITE_SHORT_WEATHER_API_KEY` : 기상청 API key
