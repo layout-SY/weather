@@ -6,6 +6,7 @@ import type {
   UltraSrtNcstResponse,
   VilageFcstResponse,
 } from '../model/VFSInterface';
+import { dateUtils } from './dateUtils';
 
 export const weatherUtils = () => {
   const getCurrentTemp = (items: UltraSrtNcstResponse[]) => {
@@ -13,7 +14,9 @@ export const weatherUtils = () => {
     return current?.obsrValue ?? null;
   };
 
-  const getTodayTemps = (items: VilageFcstResponse[], today: string) => {
+  const getTodayTemps = (items: VilageFcstResponse[]) => {
+    const { formatDate } = dateUtils();
+    const today = formatDate(new Date());
     const todayItems = items.filter((item) => String(item.fcstDate) === today);
 
     const minItem = todayItems.find((item) => item.category === 'TMN');
