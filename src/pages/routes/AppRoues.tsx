@@ -17,11 +17,6 @@ const FavoriteWeathers = lazy(() =>
     default: module.FavoriteWeathers,
   }))
 );
-const NotFoundPage = lazy(() =>
-  import('../notFoundPage/NotFoundPage').then((module) => ({
-    default: module.NotFoundPage,
-  }))
-);
 const AddressModal = lazy(() =>
   import('../../entities/address/components/AdrressModal').then((module) => ({
     default: module.AddressModal,
@@ -47,7 +42,6 @@ export const AppRoutes = () => {
   const newRouteList = routeList.map((item) => {
     return {
       ...item,
-      errorElement: <NotFoundPage />,
     };
   });
 
@@ -58,8 +52,8 @@ export const AppRoutes = () => {
           <Suspense fallback={<LoadingSpinner />}>
             <AddressModal />
           </Suspense>
-          <div className="min-h-screen bg-white p-6">
-            <div className="mx-auto h-[calc(100vh-48px)] w-full max-w-6xl overflow-hidden rounded-2xl">
+          <div className='min-h-screen bg-white p-6'>
+            <div className='mx-auto h-[calc(100vh-48px)] w-full max-w-6xl overflow-hidden rounded-2xl'>
               <Outlet />
             </div>
           </div>
