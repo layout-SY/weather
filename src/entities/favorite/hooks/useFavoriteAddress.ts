@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 const STORAGE_KEY = 'favorites';
 
 const matchesPlace = (item: Place, place: Place) =>
-  item.address?.trim() === place.address?.trim()
+  item.address?.trim() === place.address?.trim();
 
 const loadFavorites = (): Place[] => {
   try {
@@ -22,6 +22,27 @@ const saveFavorites = (list: Place[]) => {
     return;
   }
   localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+};
+
+const notifyFavoritesChanged = () => {
+  window.dispatchEvent(new CustomEvent('favorites:changed'));
+};
+
+const getNextAutoAlias = (list: Place[]) => {
+  const usedNumbers = new Set<number>();
+  list.forEach((item) => {
+    const match = String(item.alias ?? '')
+      .trim()
+      .match(/^새 주소(\d+)$/);
+    if (match?.[1]) {
+      usedNumbers.add(Number(match[1]));
+    }
+  });
+  let next = 1;
+  while (usedNumbers.has(next)) {
+    next += 1;
+  }
+  return `새 주소${next}`;
 };
 
 export function useFavoriteAddress(place: Place) {
@@ -51,21 +72,27 @@ export function useFavoriteAddress(place: Place) {
     if (!alreadySaved && list.length >= 6) {
       return;
     }
+    const normalizedAlias = alias.trim().slice(0, 6);
+    const finalAlias =
+      normalizedAlias.length > 0 ? normalizedAlias : getNextAutoAlias(list);
     const item: Place = {
       ...place,
       id: list.length + 1,
-      alias: alias.trim(),
+      alias: finalAlias,
     };
     const next = list.filter((p) => !matchesPlace(p, place)).concat(item);
     saveFavorites(next);
+    notifyFavoritesChanged();
     setIsFavorite(true);
     setIsEditingAlias(false);
+    setAlias(finalAlias);
   };
 
   const removeFavorite = () => {
     const list = loadFavorites();
     const next = list.filter((p) => !matchesPlace(p, place));
     saveFavorites(next);
+    notifyFavoritesChanged();
     setIsFavorite(false);
     setIsEditingAlias(false);
     setAlias('');
