@@ -1,7 +1,10 @@
 import { lazy, Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 import { ROUTES } from '../../shared/constants/routes';
-import { AddressModalProvider } from '../../features/addressModal/context/AddressModalContext';
+import {
+  AddressModalProvider,
+  useAddressModal,
+} from '../../features/addressModal/context/AddressModalContext';
 import { LoadingSpinner } from '../../shared/components/LoadingSpinner';
 
 const MainPage = lazy(() =>
@@ -24,6 +27,20 @@ const AddressModal = lazy(() =>
     })
   )
 );
+
+const AddressModalGate = () => {
+  const { isOpen } = useAddressModal();
+
+  if (!isOpen) {
+    return null;
+  }
+
+  return (
+    <Suspense fallback={<LoadingSpinner />}>
+      <AddressModal />
+    </Suspense>
+  );
+};
 
 export const AppRoutes = () => {
   const routeList = [
@@ -51,9 +68,7 @@ export const AppRoutes = () => {
     {
       element: (
         <AddressModalProvider>
-          <Suspense fallback={<LoadingSpinner />}>
-            <AddressModal />
-          </Suspense>
+          <AddressModalGate />
           <div className='min-h-screen bg-white p-6'>
             <div className='mx-auto h-[calc(100vh-48px)] w-full max-w-6xl overflow-hidden rounded-2xl'>
               <Outlet />
