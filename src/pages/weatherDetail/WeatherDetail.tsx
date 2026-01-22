@@ -1,6 +1,6 @@
 import { useLocation } from 'react-router-dom';
-import { Detail } from '../../widgets/detail/Detail';
 import type { Place } from '../../shared/model/place';
+import { Detail } from '../../widgets/detail/components/Detail';
 
 export function WeatherDetail() {
   const location = useLocation();
