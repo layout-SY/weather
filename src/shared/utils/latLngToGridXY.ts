@@ -10,6 +10,7 @@ const OLAT = 38.0;
 const XO = 43;
 const YO = 136;
 
+// lat/lng 좌표를 기상청 API에서 사용하는 격자형 좌표로 변환
 export function latLngToGridXY({ lat, lng }: LatLng): GridXY {
   const DEGRAD = Math.PI / 180.0;
 

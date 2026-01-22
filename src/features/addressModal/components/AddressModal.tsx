@@ -1,11 +1,11 @@
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import districts from '../korea_districts.json';
-import { useQueryWithKakaoGeoAddress } from '../hooks/useQueryWithKakaoGeo';
+import districts from '../../../entities/address/korea_districts.json';
+import { useQueryWithKakaoGeoAddress } from '../../../entities/address/hooks/useQueryWithKakaoGeo';
 import { useDebounce } from '../../../shared/hooks/useDebounce';
 import { useThrottle } from '../../../shared/hooks/useThrottle';
-import { ROUTES } from '../../../pages/routes/routingConstants';
-import { getAddressResults } from '../utils/searchUtils';
+import { ROUTES } from '../../../shared/constants/routes';
+import { getAddressResults } from '../../../entities/address/utils/searchUtils';
 import { useAddressModal } from '../context/AddressModalContext';
 
 export function AddressModal() {
@@ -17,7 +17,7 @@ export function AddressModal() {
 
   const results = useMemo(
     () => getAddressResults(districts as string[], throttledQuery, 20),
-    [throttledQuery],
+    [throttledQuery]
   );
 
   const {
@@ -34,7 +34,7 @@ export function AddressModal() {
     closeModal();
     setInputValue('');
     setSelectedAddress('');
-  }
+  };
 
   if (!isOpen) {
     return null;

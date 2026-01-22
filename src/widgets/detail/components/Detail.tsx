@@ -1,14 +1,3 @@
-import { useWeather } from '../hooks/useWeather';
-import { useTimelineScroll } from '../hooks/useTimelineScroll';
-import { Place } from '../model/place';
-import { useAddressModal } from '../../address/context/AddressModalContext';
-import { Link } from 'react-router-dom';
-import { useFavoriteAddress } from '../../favorite/hooks/useFavoriteAddress';
-import { ROUTES } from '../../../pages/routes/routingConstants';
-import { formatAddress } from '../../../shared/utils/formatAddress';
-import { FavoriteWeathers } from '../../../pages/favoriteWeathers/FavoriteWeathers';
-import { dateUtils } from '../../weather/utils/dateUtils';
-import { weatherUtils } from '../../weather/utils/weatherUtils';
 import {
   BookmarkIcon as BookmarkOutline,
   ChevronLeftIcon,
@@ -19,17 +8,46 @@ import {
   SunIcon,
 } from '@heroicons/react/24/outline';
 import { BookmarkIcon as BookmarkSolid } from '@heroicons/react/24/solid';
+import { useWeather } from '../../../entities/weather/hooks/useWeather';
+import type { Place } from '../../../shared/model/place';
+import { useAddressModal } from '../../../features/addressModal/context/AddressModalContext';
+import { Link } from 'react-router-dom';
+import { useFavoriteAddress } from '../../../features/favorite/hooks/useFavoriteAddress';
+import { ROUTES } from '../../../shared/constants/routes';
+import { formatAddress } from '../../../shared/utils/formatAddress';
+import { dateUtils } from '../../../entities/weather/utils/dateUtils';
+import { weatherUtils } from '../../../entities/weather/utils/weatherUtils';
 import { LoadingSpinner } from '../../../shared/components/LoadingSpinner';
+import { useTimelineScroll } from '../hooks/useTimelineScroll';
+import FavoriteWeathers from '../../favoriteWeathers/FavoriteWeathers';
 
 const getTimelineIcon = (skyCode: number | null, ptyCode: number | null) => {
   if (ptyCode && ptyCode !== 0) {
     if ([2, 3, 6, 7].includes(ptyCode)) {
-      return <CloudIcon className='h-6 w-6 text-white/80' />;
+      return (
+        <img
+          src='/icons/snow.png'
+          alt='cloud-rain'
+          className='h-6 w-6 invert brightness-200'
+        />
+      );
     }
-    return <CloudIcon className='h-6 w-6 text-white/80' />;
+    return (
+      <img
+        src='/icons/rain.png'
+        alt='cloud-rain'
+        className='h-6 w-6 invert brightness-200'
+      />
+    );
   }
   if (skyCode === 3) {
-    return <CloudIcon className='h-6 w-6 text-white/80' />;
+    return (
+      <img
+        src='/icons/sunCloud.png'
+        alt='cloud-rain'
+        className='h-6 w-6 invert brightness-200'
+      />
+    );
   }
   if (skyCode === 4) {
     return <CloudIcon className='h-6 w-6 text-white/80' />;

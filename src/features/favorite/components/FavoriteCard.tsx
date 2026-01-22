@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
-import type { Place } from '../../detail/model/place';
-import { useWeather } from '../../detail/hooks/useWeather';
-import { ROUTES } from '../../../pages/routes/routingConstants';
+import type { Place } from '../../../shared/model/place';
+import { useWeather } from '../../../entities/weather/hooks/useWeather';
+import { ROUTES } from '../../../shared/constants/routes';
 import { formatAddress } from '../../../shared/utils/formatAddress';
 
 export function FavoriteCard({

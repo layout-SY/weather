@@ -1,4 +1,4 @@
-import { Place } from '../../detail/model/place';
+import type { Place } from '../../../shared/model/place';
 import { useEffect, useState } from 'react';
 
 const STORAGE_KEY = 'favorites';
