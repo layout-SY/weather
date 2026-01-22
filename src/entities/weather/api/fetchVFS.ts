@@ -1,4 +1,3 @@
-// src/api/vfsShortForecast.ts
 import { AxiosInstance } from '../../../shared/lib/axios';
 import { VFS_ERROR_CODE_META } from '../constants/VFSResponseConstants';
 import type {
@@ -43,7 +42,7 @@ export const vfsAxios = AxiosInstance(VFS_BASE_URL, {
 });
 
 export async function getUltraSrtNcst(
-  params: WeatherCommonRequestParams,
+  params: WeatherCommonRequestParams
 ): Promise<UltraSrtNcstResponse[]> {
   const { data } = await vfsAxios.get<VFSResponse<UltraSrtNcstResponse>>(
     '/getUltraSrtNcst',
@@ -52,32 +51,14 @@ export async function getUltraSrtNcst(
         serviceKey: SERVICE_KEY, // 인증키
         ...params,
       },
-    },
+    }
   );
 
   return data.response.body?.items?.item ?? [];
 }
 
-// export async function getUltraSrtFcst(
-//   params: WeatherCommonRequestParams
-// ): Promise<UltraSrtFcstResponseParams[]> {
-//   const { data } = await vfsAxios.get<VFSResponse<UltraSrtFcstResponseParams>>(
-//     '/getUltraSrtFcst',
-//     {
-//       params: {
-//         serviceKey: SERVICE_KEY,
-//         ...params,
-//       },
-//     }
-//   );
-//
-//   console.log(data);
-//
-//   return data.response.body?.items?.item ?? [];
-// }
-
 export async function getVilageFcst(
-  params: WeatherCommonRequestParams,
+  params: WeatherCommonRequestParams
 ): Promise<VilageFcstResponse[]> {
   const { data } = await vfsAxios.get<VFSResponse<VilageFcstResponse>>(
     '/getVilageFcst',
@@ -86,7 +67,7 @@ export async function getVilageFcst(
         serviceKey: SERVICE_KEY,
         ...params,
       },
-    },
+    }
   );
 
   return data.response.body?.items?.item ?? [];

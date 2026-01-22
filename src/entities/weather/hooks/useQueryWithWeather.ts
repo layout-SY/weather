@@ -8,7 +8,6 @@ const weatherQueryKey = (params: WeatherCommonRequestParams) => ({
   nx: params.nx,
   ny: params.ny,
   pageNo: params.pageNo,
-  dataType: params.dataType,
 });
 
 interface UseQueryWithWeatherProps {
